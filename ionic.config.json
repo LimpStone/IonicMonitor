@@ -1,0 +1,7 @@
+{
+  "name": "Monitor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
