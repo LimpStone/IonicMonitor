@@ -61,7 +61,20 @@ signInWithEmailAndPassword(auth, "email", "password")
     const errorMessage = error.message;
   });
   */
+  import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBtouk1HAW1HNf8WInK174r2LzGEaYsbtk",
+    authDomain: "peliculas-793b9.firebaseapp.com",
+    databaseURL: "https://peliculas-793b9-default-rtdb.firebaseio.com",
+    projectId: "peliculas-793b9",
+    storageBucket: "peliculas-793b9.appspot.com",
+    messagingSenderId: "368143259290",
+    appId: "1:368143259290:web:d5279eee7e3b2ce8c6f123"
+};
+const app = initializeApp(firebaseConfig);
 const App: React.FC = () => (
+  
   <IonApp>
     <IonReactRouter>
       <IonTabs>

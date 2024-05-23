@@ -1,8 +1,39 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonList,IonItem,IonLabel } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './Tab2.css';
+import React, { useEffect, useState } from 'react';
+import { getDatabase, ref, onValue } from "firebase/database";
 
+import './Tab2.css';
+interface Clave {
+  status: string;
+  usuario: string;
+}
 const Tab2: React.FC = () => {
+  const [listaClaves, setListaClaves] = useState<Clave[]>([{ status: "", usuario: "" }]);
+  const [listaKeys, setListaKeys] = useState<string[]>([]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const starCountRef = ref(db, "claves/");
+
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+
+      const keys: string[] = [];
+      const claves: Clave[] = [];
+
+      snapshot.forEach((element) => {
+        keys.push(element.key || '');
+        claves.push(element.toJSON() as Clave);
+      });
+
+      setListaKeys(keys);
+      setListaClaves(claves);
+
+      console.log("lista de claves", claves);
+    });
+  }, []);
   return (
     <IonPage>
       <IonHeader>
@@ -10,14 +41,16 @@ const Tab2: React.FC = () => {
           <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 2 page" />
-      </IonContent>
+      <IonList>
+          {listaClaves.map((clave, index) => (
+            <IonItem key={listaKeys[index]}>
+              <IonLabel>
+                <h2>{listaKeys[index]}</h2>
+                <p>{JSON.stringify(clave)}</p>
+              </IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
     </IonPage>
   );
 };

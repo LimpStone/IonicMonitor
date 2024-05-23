@@ -51,7 +51,7 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-      <IonButton onClick={() => agregarClaves(5)}>Agregar Claves</IonButton>
+      <IonButton onClick={() => agregarClaves(1)}>Agregar Claves</IonButton>
       </IonContent>
     </IonPage>
   );
