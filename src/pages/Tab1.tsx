@@ -1,37 +1,15 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButton, IonApp, IonRouterOutlet, IonToast } from '@ionic/react';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel} from '@ionic/react';
-import { calendar, personCircle, map, informationCircle, walkOutline } from 'ionicons/icons';
-import { IonButtons, IonMenu, IonMenuButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButton, IonApp, IonRouterOutlet, IonToast, IonInput, IonItem } from '@ionic/react';
 import {getDatabase,ref,push} from "firebase/database"
 import React, { useState } from 'react';
-import ExploreContainer from '../components/ExploreContainer';
-import { ellipse, logoReact, square, triangle } from "ionicons/icons";
-
 import './Tab1.css';
-import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route, useHistory } from 'react-router';
-import Tab2 from './Tab2';
-import Tab3 from './Tab3';
-import { getAuth, signOut } from 'firebase/auth';
-
 
 const Tab1: React.FC = () => {
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [alerta, setAlerta] = useState(false);
-  const history = useHistory();
+  const [totalkeys, SetKeys] = useState<number>(0);
 
-  const logout = async () => {
-    const auth = getAuth();
-    try {
-      await signOut(auth);
-      console.log("Logged out");
-      history.push('/login');
-    } catch (error) {
-      console.error("Error signing out: ", error);
-    }
-  };
   const agregarClaves = async (claves: number) => {
     console.log(claves);
     const db = getDatabase();
@@ -61,19 +39,26 @@ const Tab1: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>UWU</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-      <IonButton onClick={() => agregarClaves(1)}>Agregar Claves</IonButton> 
-      <IonButton id="open-toast" onClick={logout}>Logout</IonButton>
-      <IonToast trigger="open-toast" message="Succesful logout,later!" duration={5000} icon={walkOutline}></IonToast>
-      </IonContent>
-    </IonPage>
+    <div className= "tab1back">
+      <div className="login-container2">
+      <IonInput 
+            className='custom-input'
+            label="Number of keys"
+            labelPlacement="floating"
+            fill="outline"
+            type="number"
+            min={1}
+            max={100}  
+            placeholder="000"
+            onIonChange={(e) => SetKeys(Number(e.detail.value))}
+            ></IonInput>
+      <IonButton className="boton" onClick={() => agregarClaves(totalkeys)}>Add</IonButton>
+       
+        </div>
+        </div>
+        </IonPage>
   );
   
 };
-
+//<IonButton onClick={() => agregarClaves(1)}>Agregar Claves</IonButton> 
 export default Tab1;

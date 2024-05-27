@@ -50,7 +50,7 @@ export const Landing: React.FC = () => {
     }
   };
   return (
-    <>
+    <IonPage>
       <div className= "nepe">
       <div className="login-container">
         <IonItem>
@@ -81,9 +81,6 @@ export const Landing: React.FC = () => {
         ></IonToast>
       </div>
       </div>
-    </>
+    </IonPage>
   );
 };
-
-/*
- */

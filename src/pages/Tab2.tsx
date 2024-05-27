@@ -1,56 +1,78 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonList,IonItem,IonLabel } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import React, { useEffect, useState } from 'react';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonAvatar,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonButton,
+  IonIcon,
+} from "@ionic/react";
+import ExploreContainer from "../components/ExploreContainer";
+import React, { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 
-import './Tab2.css';
+import "./Tab2.css";
+import { trashOutline } from "ionicons/icons";
+import { Redirect } from "react-router";
+
 interface Clave {
   status: string;
   usuario: string;
 }
+
 const Tab2: React.FC = () => {
-  const [listaClaves, setListaClaves] = useState<Clave[]>([{ status: "", usuario: "" }]);
-  const [listaKeys, setListaKeys] = useState<string[]>([]);
+  const [items, setItems] = useState<Clave[]>([]);
 
   useEffect(() => {
     const db = getDatabase();
-    const starCountRef = ref(db, "claves/");
+    const clavesRef = ref(db, "claves/");
 
-    onValue(starCountRef, (snapshot) => {
+    const unsubscribe = onValue(clavesRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
-
-      const keys: string[] = [];
-      const claves: Clave[] = [];
-
-      snapshot.forEach((element) => {
-        keys.push(element.key || '');
-        claves.push(element.toJSON() as Clave);
-      });
-
-      setListaKeys(keys);
-      setListaClaves(claves);
-
-      console.log("lista de claves", claves);
+      if (data) {
+        const claves: Clave[] = Object.values(data);
+        setItems(claves);
+      }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonList>
-          {listaClaves.map((clave, index) => (
-            <IonItem key={listaKeys[index]}>
-              <IonLabel>
-                <h2>{listaKeys[index]}</h2>
-                <p>{JSON.stringify(clave)}</p>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+      <IonContent>
+        <IonGrid>
+          <IonRow>
+            {items.map((clave, index) => (
+              <IonCol size="12" sizeSm="6" sizeMd="4" key={index}>
+                <IonCard className="car">
+                  <IonCardHeader>
+                    <IonCardTitle>Status: {clave.status}</IonCardTitle>
+                    <IonCardSubtitle>User: {clave.usuario}</IonCardSubtitle>
+                  </IonCardHeader>
+                  <IonButton fill="clear">Edit</IonButton>
+                  <IonButton fill="clear" ><IonIcon icon={trashOutline} /></IonButton>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };

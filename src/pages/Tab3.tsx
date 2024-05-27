@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar ,IonList,IonItem,IonLabel} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar ,IonList,IonItem,IonLabel, IonAvatar} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import React, { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from "firebase/database";
@@ -48,7 +48,11 @@ const Tab3: React.FC = () => {
               <IonLabel>
                 <p>{JSON.stringify(clave)}</p>
               </IonLabel>
+              <IonAvatar slot="start">
+              <img src={'https://picsum.photos/80/80?random=' + index} alt="avatar" />
+            </IonAvatar>
             </IonItem>
+            
           ))}
         </IonList>
     </IonPage>

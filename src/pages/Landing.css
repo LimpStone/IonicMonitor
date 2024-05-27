@@ -9,7 +9,12 @@ IonToast{
     align-items: center;
     background-color: rgb(75, 75, 75);
 }
-  
+ion-toast {
+  --background: #632c2c;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #000000;
+  --border-radius: 10px ;
+}  
   /* Estilo del contenedor de inicio de sesión */
   .login-container {
     display: flex;
@@ -19,19 +24,13 @@ IonToast{
     height: 50%; 
     max-width: 100%;
     padding: 4%;
-    background-color: rgb(31, 31, 31); /* Puedes ajustar el color de fondo */
-    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); /* Añade una sombra para destacar el contenedor */
-    border-radius: 8px; /* Añade bordes redondeados si lo deseas */
+    background-color: rgb(31, 31, 31); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1); 
+    border-radius: 8px; 
   }
   
   /* Asegura que los elementos dentro del contenedor se ajusten al ancho */
   .login-container ion-item,
   .login-container ion-button {
     width: 100%;
-  }
-  ion-col {
-    background-color: #135d54;
-    border: solid 1px #fff;
-    color: #fff;
-    text-align: center;
   }
