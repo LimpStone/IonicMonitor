@@ -1,5 +1,21 @@
-.car{
+.card{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+.btncolor{
+    color: rgb(234, 0, 255);
+}
+.btncolor2{
+    color: rgb(203, 176, 206);
+}
+.btncolor2:hover::part(native) {
+    color: rgb(157, 31, 189); 
+  }
+.center-right {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end; 
+    height: 100%; 
+    text-align: right; 
+  }

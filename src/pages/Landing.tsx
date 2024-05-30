@@ -1,23 +1,14 @@
 import {
-  IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonItem,
   IonInput,
-  IonAlert,
-  IonToast,
-  IonRow,
-  IonCol,
-  IonGrid,
+  IonToast,                                  
 } from "@ionic/react";
 import "./Landing.css";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { firebaseApp } from "../components/Providers";
 import { useMemo, useState } from "react";
@@ -37,9 +28,8 @@ export const Landing: React.FC = () => {
   const signIn = async (email: string, password: string) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      const user = response.user;
       history.push("/");
-      // What will you do after you get the user?
+      
     } catch (error) {
       const err = error as { code: string; message: string };
       console.error("Error signing in with password and email", err);
@@ -53,7 +43,7 @@ export const Landing: React.FC = () => {
     <IonPage>
       <div className= "nepe">
       <div className="login-container">
-        <IonItem>
+        <IonItem className="NoCol">
           <IonInput
             label="Email input"
             type="email"
@@ -61,7 +51,7 @@ export const Landing: React.FC = () => {
             onIonChange={(e) => setEmail(e.detail.value!)}
           ></IonInput>
         </IonItem>
-        <IonItem>
+        <IonItem className="NoCol">
           <IonInput
             label="Password input"
             type="password"
@@ -69,7 +59,7 @@ export const Landing: React.FC = () => {
             onIonChange={(e) => setPassword(e.detail.value!)}
           ></IonInput>
         </IonItem>
-        <IonButton expand="block" onClick={() => signIn(email, password)}>
+        <IonButton className="boton" expand="block" onClick={() => signIn(email, password)}>
           Log in
         </IonButton>
         <IonToast

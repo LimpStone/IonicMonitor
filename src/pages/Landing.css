@@ -15,7 +15,10 @@ ion-toast {
   --color: #000000;
   --border-radius: 10px ;
 }  
-  /* Estilo del contenedor de inicio de sesión */
+.NoCol{
+  --background:rgba(255, 255, 255, 0);
+  color: rgb(209, 195, 219);
+}
   .login-container {
     display: flex;
     flex-direction: column;
@@ -29,7 +32,6 @@ ion-toast {
     border-radius: 8px; 
   }
   
-  /* Asegura que los elementos dentro del contenedor se ajusten al ancho */
   .login-container ion-item,
   .login-container ion-button {
     width: 100%;

@@ -10,6 +10,7 @@ import {
   IonTabButton,
   IonTabs,
   IonToast,
+  IonToggle,
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -37,7 +38,7 @@ const App: React.FC = () => {
   const auth = useMemo(() => {
     return getAuth(firebaseApp);
   }, [firebaseApp]);
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -91,19 +92,19 @@ const Tabs: React.FC = () => {
       <Route path="/tabs/tab3" component={Tab3} />
     </IonRouterOutlet>
     <IonTabBar  slot="bottom">
-      <IonTabButton  tab="tab1" href="/tabs/tab1">
+      <IonTabButton className="btncolor2"  tab="tab1" href="/tabs/tab1">
         <IonIcon icon={addOutline} />
         <IonLabel>Add Keys</IonLabel>
       </IonTabButton>
-      <IonTabButton tab="tab2" href="/tabs/tab2">
+      <IonTabButton className="btncolor2" tab="tab2" href="/tabs/tab2">
         <IonIcon icon={keyOutline} />
         <IonLabel>Keys</IonLabel>
       </IonTabButton>
-      <IonTabButton tab="tab3" href="/tabs/tab3">
+      <IonTabButton className="btncolor2" tab="tab3" href="/tabs/tab3">
         <IonIcon icon={peopleOutline} />
         <IonLabel>Users</IonLabel>
       </IonTabButton>
-      <IonTabButton onClick={handleTabButtonClick} tab="Options">
+      <IonTabButton className="btncolor2"  onClick={handleTabButtonClick} tab="Options">
         <IonIcon icon={logOutOutline} />
         <IonLabel>LogOut</IonLabel>
         <IonAlert
@@ -129,13 +130,9 @@ const Tabs: React.FC = () => {
           ]}
           onDidDismiss={() => setShowAlert(false)}
         ></IonAlert>
-        <IonToast isOpen={showToast} onDidDismiss={() => setShowToast(false)} message="Succesful logout,later!" duration={5000} icon={walkOutline}></IonToast>
+        <IonToast className="toast1" isOpen={showToast} onDidDismiss={() => setShowToast(false)} message="Succesful logout,later!" duration={5000} icon={walkOutline}></IonToast>
       </IonTabButton>
     </IonTabBar>
   </IonTabs>
 );};
-/*
-<IonButton id="open-toast" onClick={logout}>Logout</IonButton>
-<IonToast trigger="open-toast" message="Succesful logout,later!" duration={5000} icon={walkOutline}></IonToast>
-*/
 export default App;

@@ -32,7 +32,9 @@
         border-radius: 8px; 
       }
   }  
-
+.toast1{
+  --background: rgb(173, 84, 173);
+}
 .tab1back{
     width: 100%;
     height: 100%;

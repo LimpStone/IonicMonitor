@@ -52,8 +52,14 @@ const Tab1: React.FC = () => {
             placeholder="000"
             onIonChange={(e) => SetKeys(Number(e.detail.value))}
             ></IonInput>
-      <IonButton className="boton" onClick={() => agregarClaves(totalkeys)}>Add</IonButton>
-       
+      <IonButton id="cd" className="boton" onClick={() => agregarClaves(totalkeys)}>Add</IonButton>
+      <IonToast
+          position='top'
+          className='toast1'
+          trigger= "cd"
+          message={`Added ${totalkeys}  keys`}
+          duration={5000}
+        />
         </div>
         </div>
         </IonPage>
